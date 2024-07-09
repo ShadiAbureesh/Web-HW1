@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
+    console.log("navbar.js loaded"); // Add this line
+
     const navbarHTML = `
         <nav class="bg-white dark:bg-gray-800 shadow">
             <div class="container mx-auto px-4">
@@ -25,6 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
 
     document.body.insertAdjacentHTML('afterbegin', navbarHTML);
+
+    console.log("Navbar inserted"); // Add this line
 
     const themeToggleBtn = document.getElementById('theme-toggle');
     const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');

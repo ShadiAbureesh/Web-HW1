@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("navbar.js loaded"); // Add this line
-
     const navbarHTML = `
         <nav class="bg-white dark:bg-gray-800 shadow">
             <div class="container mx-auto px-4">

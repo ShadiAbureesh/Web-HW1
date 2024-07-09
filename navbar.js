@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("navbar.js loaded"); // Add this line
+    console.log("navbar.js loaded"); // Confirm the script is loaded
 
     const navbarHTML = `
         <nav class="bg-white dark:bg-gray-800 shadow">
@@ -26,48 +26,49 @@ document.addEventListener('DOMContentLoaded', function() {
         </nav>
     `;
 
-    document.body.insertAdjacentHTML('afterbegin', navbarHTML);
+    document.body.insertAdjacentHTML('afterbegin', navbarHTML); // Insert navbar HTML
 
-    console.log("Navbar inserted"); // Add this line
+    console.log("Navbar inserted"); // Confirm navbar is inserted
 
+    // Theme toggle functionality
     const themeToggleBtn = document.getElementById('theme-toggle');
     const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
     const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+    const updateThemeIcons = () => {
+        if (document.documentElement.classList.contains('dark')) {
+            themeToggleDarkIcon.classList.remove('hidden');
+            themeToggleLightIcon.classList.add('hidden');
+        } else {
+            themeToggleDarkIcon.classList.add('hidden');
+            themeToggleLightIcon.classList.remove('hidden');
+        }
+    };
 
     // Update the initial theme state
     if (localStorage.getItem('color-theme') === 'dark' || 
         (!localStorage.getItem('color-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
-        themeToggleDarkIcon.classList.remove('hidden');
-        themeToggleLightIcon.classList.add('hidden');
     } else {
         document.documentElement.classList.remove('dark');
-        themeToggleDarkIcon.classList.add('hidden');
-        themeToggleLightIcon.classList.remove('hidden');
     }
+    updateThemeIcons();
 
-    // Listen for toggle button click
     themeToggleBtn.addEventListener('click', function() {
-        // Toggle icons inside button
-        themeToggleDarkIcon.classList.toggle('hidden');
-        themeToggleLightIcon.classList.toggle('hidden');
+        document.documentElement.classList.toggle('dark');
+        updateThemeIcons();
 
-        // If set via local storage previously
         if (localStorage.getItem('color-theme')) {
             if (localStorage.getItem('color-theme') === 'light') {
-                document.documentElement.classList.add('dark');
                 localStorage.setItem('color-theme', 'dark');
             } else {
-                document.documentElement.classList.remove('dark');
                 localStorage.setItem('color-theme', 'light');
             }
         } else {
             if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('color-theme', 'light');
-            } else {
-                document.documentElement.classList.add('dark');
                 localStorage.setItem('color-theme', 'dark');
+            } else {
+                localStorage.setItem('color-theme', 'light');
             }
         }
     });
